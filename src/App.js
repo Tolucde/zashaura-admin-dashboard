@@ -9,21 +9,21 @@ function App() {
 
   const token = localStorage.getItem("token");
 
-  useEffect(() => {
-    if (!localStorage.getItem("token")) {
-      navigate("/login");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!localStorage.getItem("token")) {
+  //     navigate("/login");
+  //   }
+  // }, []);
   return (
     <>
-      {token ? (
-        <Admin />
+      <Admin />
+      {/* {token ? (
       ) : (
         <Routes>
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
         </Routes>
-      )}
+      )} */}
     </>
   );
 }
