@@ -1,12 +1,27 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { login } from "../utils/api/user";
 
 const Login = () => {
   const [form, setForm] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const login_admin = (e) => {
-    // return dispatch(login(form))
+  const login_admin = async (e) => {
     e.preventDefault();
-    console.log(form);
+
+    const { email, password } = form;
+
+    const token = await login({ email, password });
+
+    if (!token) {
+      setError("Invalid email or password");
+      return;
+    }
+    console.log(token);
+
+    localStorage.setItem("token", JSON.stringify(token));
+    navigate("/");
   };
 
   const handle_input = (e) => {

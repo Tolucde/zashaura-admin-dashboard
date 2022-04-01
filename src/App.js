@@ -7,9 +7,7 @@ import Register from "./Auth/Register";
 function App() {
   const navigate = useNavigate();
 
-  const user = localStorage.getItem("user");
-
-  console.log(user);
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     if (!localStorage.getItem("token")) {
@@ -18,7 +16,7 @@ function App() {
   }, []);
   return (
     <>
-      {user ? (
+      {token ? (
         <Admin />
       ) : (
         <Routes>

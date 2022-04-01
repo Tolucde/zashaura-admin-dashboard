@@ -8,7 +8,7 @@ const SideNav = () => {
       className="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse"
       id="sidebarMenu"
     >
-      <div className="position-sticky pt-3">
+      <div className="position-fixed pt-3">
         <ul className="nav flex-column">
           <li className="nav-item">
             <Link className="nav-link" aria-current="page" to="/">

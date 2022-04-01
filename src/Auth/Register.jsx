@@ -6,10 +6,30 @@ const Register = () => {
     lastname: "",
     email: "",
     password: "",
+    confirmPassword: "",
+    token: "",
   });
+
+  const [error, setError] = useState({});
 
   const handle_submit = (e) => {
     e.preventDefault();
+    const { firstname, lastname, email, password, confirmPassword, token } =
+      form;
+
+    if (password !== confirmPassword) {
+      setError((state) => ({ ...state, password: "Passwords do not match" }));
+    }
+
+    if (password.length < 8) {
+      setError((state) => ({
+        ...state,
+        password: "Password must be 8 characters or more",
+      }));
+    }
+
+    setError({});
+
     console.log(form);
   };
 
@@ -29,11 +49,11 @@ const Register = () => {
             height="57"
           />
           <h1 className="h4 mb-3 fw-normal">Let's Get You Started</h1>
-          <div class="row pb-3">
-            <div class="col form-floating pb-2">
+          <div className="row pb-3">
+            <div className="col form-floating pb-2">
               <input
                 type="text"
-                class="form-control px-2"
+                className="form-control px-2"
                 placeholder="First name"
                 aria-label="First name"
                 autoComplete="given-name"
@@ -43,10 +63,10 @@ const Register = () => {
               />
               <label htmlFor="firstName">First name</label>
             </div>
-            <div class="col form-floating pb-2">
+            <div className="col form-floating pb-2">
               <input
                 type="text"
-                class="form-control px-2"
+                className="form-control px-2"
                 placeholder="Last name"
                 aria-label="Last name"
                 autoComplete="family-name"
@@ -57,11 +77,11 @@ const Register = () => {
               <label htmlFor="lastName">Last name</label>
             </div>
           </div>
-          <div class="row">
-            <div class="col form-floating pb-2">
+          <div className="row pb-3">
+            <div className="col form-floating pb-2">
               <input
                 type="email"
-                class="form-control px-2"
+                className="form-control px-2"
                 placeholder="email@example.com"
                 aria-label="Email"
                 autoComplete="email"
@@ -72,10 +92,24 @@ const Register = () => {
               <label htmlFor="email">Email address</label>
             </div>
 
-            <div class="col form-floating pb-2">
+            <div className="col form-floating pb-2">
+              <input
+                type="text"
+                className="form-control px-2"
+                placeholder="Token"
+                aria-label="token"
+                id="token"
+                name="token"
+                onChange={handle_input}
+              />
+              <label htmlFor="token">Token</label>
+            </div>
+          </div>
+          <div className="row pb-3">
+            <div className="col form-floating pb-2">
               <input
                 type="password"
-                class="form-control px-2"
+                className="form-control px-2"
                 placeholder="Password"
                 aria-label="Password"
                 autoComplete="current-password"
@@ -85,6 +119,21 @@ const Register = () => {
               />
               <label htmlFor="password">Password</label>
             </div>
+            <div className="col form-floating pb-2">
+              <input
+                type="password"
+                className="form-control px-2"
+                placeholder="Confirm Password"
+                aria-label="Password Confirmation"
+                id="confirmPassword"
+                name="confirmPassword"
+                onChange={handle_input}
+              />
+              <label htmlFor="confirmPassword">Password</label>
+              {error.password && (
+                <p className="text-danger">{error.password}</p>
+              )}
+            </div>
           </div>
           <button
             className="w-50 my-4 btn btn-lg btn-primary"
@@ -93,8 +142,8 @@ const Register = () => {
           >
             Sign Up
           </button>
-          <p className="mt-5 mb-3 text-muted">
-            Zashaura © {new Date().getFullYear()}{" "}
+          <p className="mt-5 m-3 text-muted">
+            Zashaura © {new Date().getFullYear()}
           </p>
         </form>
       </main>

@@ -2,21 +2,13 @@ import axios from "../axios";
 // login
 async function login({ email, password }) {
   try {
-    const response = await axios.post("/login", { email, password });
+    const response = await axios.post("/auth/login", { email, password });
 
-    if (!response) {
-      return {
-        error: "Login failed",
-      };
-    }
+    const { token } = response.data.data.data;
 
-    const { token } = response.data.data;
-
-    localStorage.setItem("token", token);
-
-    return;
+    return token;
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 }
 
@@ -41,3 +33,5 @@ async function register({ firstname, lastname, email, password }) {
     console.log(error);
   }
 }
+
+export { login, register };
